@@ -36,7 +36,7 @@ it('should not be able to create a new user with same email from another', async
         password: '123456',
     });
 
-    expect(
+    await expect(
         createUser.execute({
             name: 'John Doe',
             email: 'johndoe@example.com',
