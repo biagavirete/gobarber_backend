@@ -1,71 +1,73 @@
-# Recuperação de senha
+# GoBarber API
 
-**RF**
+GoBarber is the final project developed during the GoStack Bootcamp ([Rocketseat](https://rocketseat.com.br/) :rocket:). It is a barber shop application that allows barbers (providers) to inform their schedule availability and users to choose the provider and schedule their appointments.
 
-- O usuário deve poder recuperar sua renha informando o seu e-mail;
-- O usuário deve receber um e-mail com instruções de recuperação de senha;
-- O usuário deve poder resetar sua senha;
+The back-end project (API) provides everything needed to organize the appointments. Customers can choose their appointments' date and hour and providers can see set their schedule, choosing their available hours and check their dashboard to see their next appointments.
 
-**RNF**
+<i>To see the front-end project, click [here](https://github.com/biagavirete/gobarber_frontend).<br>
+To see the mobile client, click [here](https://github.com/biagavirete/gobarber_mobile).</i>
 
-- Utilizar Mailtrap para testar envios em ambiente de dev;
-- Utilizar Amazon SES para envios em produção;
-- O envio de e-mails deve acontecer em segundo plano (background job);
+## Getting started
 
-**RN**
+**Installing**
+> Cloning the repository
 
-- O link enviado por email para resetar senha deve expirar em 2h;
-- O usuário precisa confirmar a nova senha ao resetar sua senha;
-- Precisamos identificar o usuário
+```bash
+$ git clone https://github.com/biagavirete/gobarber_backend.git
+$ cd gobarber_backend
+```
 
-# Atualização de perfil
+**Running**
+> Installing dependencies
 
-**RF**
+```bash
+$ yarn
+```
 
-- O usuário deve poder atualizar seu nome, email e senha;
+> Setting .env - make a copy of .env.example to .env and set with your environment variables.
 
-**RNF**
+```bash
+$ cp .env.example .env
+```
 
-**RN**
+> Create PostgreSQL instance using Docker
 
-- O usuário não pode alterar seu email para um email já utilizado;
-- Para atualizar sua senha, o usuário deve informar a senha antiga;
-- Para atualizar sua senha, o usuário deve confirmar a nova senha;
+```bash
+$ docker run --name gobarber-postgres -e POSTGRES_USER=docker -e POSTGRES_DB=gobarber -e POSTGRES_PASSWORD=docker -p 5432:5432 -d postgres
+```
 
-# Painel do prestador
+> Create MongoDB instance using Docker
 
-**RF**
+```bash
+$ docker run --name gobarber-mongodb -p 27017:27017 -d -t mongo
+```
 
-- O usuário deve poder listar seus agendamentos de um dia específico;
-- O prestador deve receber uma notificação sempre que houver um novo agendamento;
-- O prestador deve poder visualizar as notificações não lidas;
+> Create Redis instance using Docker
 
-**RNF**
+```bash
+$ docker run --name gobarber-redis -p 6379:6379 -d -t redis:alpine
+```
 
-- Os agendamentos do prestador no dia devem ser armazenados em cache;
-- As notificações do prestador devem ser armazenadas no MongoDB;
-- As notificações do prestador devem ser enviadas em tempo real utilizando Socket.io;
+> Run the migrations
 
-**RN**
+```bash
+$ yarn typeorm migration:run
+```
 
-- A notificação deve ter um status de lida ou não lida para que o prestador possa controlar;
+> Run the API
 
-# Agendamento de serviços
+```bash
+$ yarn dev:server
+```
 
-**RF**
+## Built with
 
-- o usuário deve poder listar todos os prestadores de serviço cadastrados;
-- O usuário deve poder listar os dias de um mês com pelo menos um horário disponível de um prestador;
-- O usuário deve poder listar horários disponíveis em um dia específico de um prestador;
-- O usuário deve poder realizar um novo agendamento com um prestador;
-
-**RNF**
-
-- A listagem de prestadores deve ser armazenada em cache;
-
-**RN**
-
-- Cada agendamento deve durar 1h exatamente;
-- Os agendamentos devem estar disponíveis entre 08h e 18h (primeiro às 08h, último às 17h);
-- O usuário não pode agendar em um horário já ocupado;
-- O usuário não pode agendar serviços consigo mesmo;
+* Typescript
+* Node.js
+* Express
+* Multer
+* TypeORM
+* JWT-Token
+* uuid-v4
+* Date-FNS
+* Jest
